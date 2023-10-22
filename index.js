@@ -12,7 +12,7 @@ mongoose
       process.env.MONGO_USER +
       ':' +
       process.env.MONGO_PASS +
-      '@cluster0.j7xqxtl.mongodb.net/dllo-backend-2023-10',
+      '@proyecto1.szw21vh.mongodb.net',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -30,8 +30,8 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-import empanadaRoutes from './empanada/empanada.routes'
-app.use('/empanada', empanadaRoutes)
+// import empanadaRoutes from './empanada/empanada.routes'
+// app.use('/empanada', empanadaRoutes)
 
 // Endpoint para 404
 app.use((req, res) => {
