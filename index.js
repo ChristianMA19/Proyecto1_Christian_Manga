@@ -30,6 +30,15 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+import pedidosRouters from './pedidos/pedidos.routes'
+app.use('/pedidos', pedidosRouters)
+
+// import empanadaRoutes from './empanada/empanada.routes'
+// app.use('/empanada', empanadaRoutes)
+
+// import empanadaRoutes from './empanada/empanada.routes'
+// app.use('/empanada', empanadaRoutes)
+
 // import empanadaRoutes from './empanada/empanada.routes'
 // app.use('/empanada', empanadaRoutes)
 

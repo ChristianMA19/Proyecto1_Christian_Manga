@@ -11,9 +11,10 @@ export async function getpedidos(req,res) {
 
 export async function createpedidos(req, res) {
   try {
-    const { name } = req.body;
-    const pedidos = new pedidos({ name });
-    const resultado = await pedidos.save();
+    const order = req.body;
+    console.log(order);
+    const pedido = new pedidos(order);
+    const resultado = await pedido.save();
     res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);

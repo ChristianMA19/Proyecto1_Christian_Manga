@@ -11,9 +11,9 @@ export async function getusuarios(req,res) {
 
 export async function createusuarios(req, res) {
   try {
-    const { name } = req.body;
-    const usuarios = new usuarios({ name });
-    const resultado = await usuarios.save();
+    const user = req.body;
+    const usuario = new usuarios(user);
+    const resultado = await usuario.save();
     res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);

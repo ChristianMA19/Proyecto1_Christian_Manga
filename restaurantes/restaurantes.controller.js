@@ -11,9 +11,9 @@ export async function getrestaurantes(req,res) {
 
 export async function createrestaurantes(req, res) {
   try {
-    const { name } = req.body;
-    const restaurantes = new restaurantes({ name });
-    const resultado = await restaurantes.save();
+    const restaurant = req.body;
+    const restaurante = new restaurantes(restaurant);
+    const resultado = await restaurante.save();
     res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);

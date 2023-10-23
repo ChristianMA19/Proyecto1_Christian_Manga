@@ -2,16 +2,16 @@ import { createusuarios, deleteusuarios, getusuarios, patchusuarios } from "./us
 import {Router} from 'express';
 const router = Router();
 
-// Endpoint GET /prueba
+// Endpoint GET /prueba Read
 router.get('/', getusuarios );
 
-// Endpoint POST /prueba
+// Endpoint POST /prueba Create
 router.post('/', createusuarios );
 
-// Endpoint PATCH /prueba
+// Endpoint PATCH /prueba Update
 router.patch('/', patchusuarios );
 
-// Endpoint DELETE /prueba
+// Endpoint DELETE /prueba Delete
 router.delete('/', deleteusuarios );
 
 export default router;

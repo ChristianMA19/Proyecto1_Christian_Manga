@@ -11,9 +11,9 @@ export async function getproductos(req,res) {
 
 export async function createproductos(req, res) {
   try {
-    const { name } = req.body;
-    const productos = new productos({ name });
-    const resultado = await productos.save();
+    const product = req.body;
+    const producto = new productos(product);
+    const resultado = await producto.save();
     res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);
