@@ -9,7 +9,7 @@ router.get('/', getrestaurantes );
 router.post('/', createrestaurantes );
 
 // Endpoint PATCH /prueba
-router.patch('/', patchrestaurantes );
+router.patch('/:idrestaurante', patchrestaurantes );
 
 // Endpoint DELETE /prueba
 router.delete('/:idrestaurante', deleterestaurantes );

@@ -21,6 +21,12 @@ export async function createproductos(req, res) {
 }
 
 export async function patchproductos(req, res) {
+  const idproducto = req.params.idproducto;
+  const producto = req.body;
+  const resultado = await Usuarios.findByIdAndUpdate(idproducto,producto, { new: true });
+  if (!resultado) {
+    return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+  }
   res.status(200).json({});
 }
 
@@ -28,7 +34,7 @@ export async function deleteproductos(req, res) {
   const idproducto = req.params.idproducto;
   const resultado = await Usuarios.findByIdAndUpdate(idproducto,{ isDeleted: 'true' });
   if (!resultado) {
-    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    return res.status(404).json({ mensaje: 'Pedido no encontrado' });
   }
   res.status(200).json({});
 }

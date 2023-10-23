@@ -9,7 +9,7 @@ router.get('/', getproductos );
 router.post('/', createproductos );
 
 // Endpoint PATCH /prueba
-router.patch('/', patchproductos );
+router.patch('/:idproducto', patchproductos );
 
 // Endpoint DELETE /prueba
 router.delete('/:idproducto', deleteproductos );

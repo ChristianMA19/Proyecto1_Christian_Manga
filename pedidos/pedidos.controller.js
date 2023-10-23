@@ -24,6 +24,12 @@ export async function createpedidos(req, res) {
 }
 
 export async function patchpedidos(req, res) {
+  const idpedidos = req.params.idpedidos;
+  const pedido = req.body;
+  const resultado = await Usuarios.findByIdAndUpdate(idpedidos,pedido, { new: true });
+  if (!resultado) {
+    return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+  }
   res.status(200).json({});
 }
 

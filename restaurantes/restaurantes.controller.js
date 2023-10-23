@@ -21,6 +21,12 @@ export async function createrestaurantes(req, res) {
 }
 
 export async function patchrestaurantes(req, res) {
+  const idrestaurante = req.params.idrestaurante;
+  const restaurante = req.body;
+  const resultado = await Usuarios.findByIdAndUpdate(idrestaurante,restaurante, { new: true });
+  if (!resultado) {
+    return res.status(404).json({ mensaje: 'Restaurante no encontrado' });
+  }
   res.status(200).json({});
 }
 
@@ -28,7 +34,7 @@ export async function deleterestaurantes(req, res) {
   const idrestaurante = req.params.idrestaurante;
   const resultado = await Usuarios.findByIdAndUpdate(idrestaurante,{ isDeleted: 'true' });
   if (!resultado) {
-    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    return res.status(404).json({ mensaje: 'Restaurante no encontrado' });
   }
   res.status(200).json({});
 }

@@ -6,7 +6,7 @@ const usuariosSchema = mongoose.Schema(
     name: { type: String, required: [true, 'Nombra tu usuario.'], unique: [true] },
     password: { type: String, required: [true, 'Introduce tu contraseña.'] },
     correo: { type: String, required: [true, 'Introduce tu correo.'], unique: [true] },
-    celular: { type: String, required: [true, 'Introduce tu celular.'], unique: [true] },
+    celular: { type: Number, required: [true, 'Introduce tu celular.'], unique: [true] },
     direccion: { type: String, required: [true, 'Introduce tu direccion.'] },
     opcion: {
       type: String, 

@@ -9,7 +9,7 @@ router.get('/', getpedidos );
 router.post('/', createpedidos );
 
 // Endpoint PATCH /prueba
-router.patch('/', patchpedidos );
+router.patch('/:idpedidos', patchpedidos );
 
 // Endpoint DELETE /prueba
 router.delete('/:idpedidos', deletepedidos );

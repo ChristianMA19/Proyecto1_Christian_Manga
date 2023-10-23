@@ -9,7 +9,7 @@ router.get('/', getusuarios );
 router.post('/', createusuarios );
 
 // Endpoint PATCH /prueba Update
-router.patch('/', patchusuarios );
+router.patch('/:idusuario', patchusuarios );
 
 // Endpoint DELETE /prueba Delete
 router.delete('/:idusuario', deleteusuarios );
