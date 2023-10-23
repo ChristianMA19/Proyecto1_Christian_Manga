@@ -1,5 +1,5 @@
 
-import restaurantes from './restaurantes.model';
+import Restaurantes from './restaurantes.model';
 
 export async function getrestaurantes(req,res) {
   // const { name } = req.query;
@@ -12,7 +12,7 @@ export async function getrestaurantes(req,res) {
 export async function createrestaurantes(req, res) {
   try {
     const restaurant = req.body;
-    const restaurante = new restaurantes(restaurant);
+    const restaurante = new Restaurantes(restaurant);
     const resultado = await restaurante.save();
     res.status(200).json(resultado);
   } catch (err) {
@@ -25,5 +25,10 @@ export async function patchrestaurantes(req, res) {
 }
 
 export async function deleterestaurantes(req, res) {
+  const idrestaurante = req.params.idrestaurante;
+  const resultado = await Usuarios.findByIdAndUpdate(idrestaurante,{ isDeleted: 'true' });
+  if (!resultado) {
+    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+  }
   res.status(200).json({});
 }

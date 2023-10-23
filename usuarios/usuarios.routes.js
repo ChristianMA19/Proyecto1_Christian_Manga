@@ -12,6 +12,6 @@ router.post('/', createusuarios );
 router.patch('/', patchusuarios );
 
 // Endpoint DELETE /prueba Delete
-router.delete('/', deleteusuarios );
+router.delete('/:idusuario', deleteusuarios );
 
 export default router;

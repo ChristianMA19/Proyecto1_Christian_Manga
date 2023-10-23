@@ -15,4 +15,4 @@ const pedidosSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('pedidos', pedidosSchema);
+export default mongoose.model('Pedidos', pedidosSchema);

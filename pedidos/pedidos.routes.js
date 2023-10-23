@@ -12,6 +12,6 @@ router.post('/', createpedidos );
 router.patch('/', patchpedidos );
 
 // Endpoint DELETE /prueba
-router.delete('/', deletepedidos );
+router.delete('/:idpedidos', deletepedidos );
 
 export default router;

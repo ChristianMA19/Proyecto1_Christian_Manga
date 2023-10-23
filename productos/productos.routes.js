@@ -12,6 +12,6 @@ router.post('/', createproductos );
 router.patch('/', patchproductos );
 
 // Endpoint DELETE /prueba
-router.delete('/', deleteproductos );
+router.delete('/:idproducto', deleteproductos );
 
 export default router;

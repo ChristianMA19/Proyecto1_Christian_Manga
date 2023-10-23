@@ -1,8 +1,10 @@
 
-import usuarios from './usuarios.model';
+import Usuarios from './usuarios.model';
 
 export async function getusuarios(req,res) {
   // const { name } = req.query;
+  const idusuario = req.params.idusuario;
+  console.log(idusuario);
 
   const usuarioss = await usuarios.find(req.query);
 
@@ -12,7 +14,7 @@ export async function getusuarios(req,res) {
 export async function createusuarios(req, res) {
   try {
     const user = req.body;
-    const usuario = new usuarios(user);
+    const usuario = new Usuarios(user);
     const resultado = await usuario.save();
     res.status(200).json(resultado);
   } catch (err) {
@@ -25,5 +27,10 @@ export async function patchusuarios(req, res) {
 }
 
 export async function deleteusuarios(req, res) {
+  const idusuario = req.params.idusuario;
+  const resultado = await Usuarios.findByIdAndUpdate(idusuario,{ isDeleted: 'true' });
+  if (!resultado) {
+    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+  }
   res.status(200).json({});
 }

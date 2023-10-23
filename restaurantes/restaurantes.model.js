@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const restaurantesSchema = mongoose.Schema(
   {
     // campos
-      name: { type: String, required: [true] },
+      name: { type: String, required: [true], unique: [true]},
       direccion: { type: String, required: [true] },
       categorias: {
         type: [String], 
@@ -20,4 +20,4 @@ const restaurantesSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('restaurantes', restaurantesSchema);
+export default mongoose.model('Restaurantes', restaurantesSchema);

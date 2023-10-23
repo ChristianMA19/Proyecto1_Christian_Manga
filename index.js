@@ -33,14 +33,14 @@ app.use(express.json());
 import pedidosRouters from './pedidos/pedidos.routes'
 app.use('/pedidos', pedidosRouters)
 
-// import empanadaRoutes from './empanada/empanada.routes'
-// app.use('/empanada', empanadaRoutes)
+import usuariosRoutes from './usuarios/usuarios.routes'
+app.use('/usuarios', usuariosRoutes)
 
-// import empanadaRoutes from './empanada/empanada.routes'
-// app.use('/empanada', empanadaRoutes)
+import restaurantesRoutes from './restaurantes/restaurantes.routes'
+app.use('/restaurantes', restaurantesRoutes)
 
-// import empanadaRoutes from './empanada/empanada.routes'
-// app.use('/empanada', empanadaRoutes)
+import productosRoutes from './productos/productos.routes'
+app.use('/productos', productosRoutes)
 
 // Endpoint para 404
 app.use((req, res) => {

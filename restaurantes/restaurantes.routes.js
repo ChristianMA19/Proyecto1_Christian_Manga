@@ -12,6 +12,6 @@ router.post('/', createrestaurantes );
 router.patch('/', patchrestaurantes );
 
 // Endpoint DELETE /prueba
-router.delete('/', deleterestaurantes );
+router.delete('/:idrestaurante', deleterestaurantes );
 
 export default router;
