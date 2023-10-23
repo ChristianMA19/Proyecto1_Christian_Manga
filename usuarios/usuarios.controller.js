@@ -2,13 +2,14 @@
 import Usuarios from './usuarios.model';
 
 export async function getusuarioscorpas(req,res) {
-  const { name } = req.query;
-  const idusuario = req.params.idusuario;
-  console.log(idusuario);
+  try{
+    const { correo , password } = req.params;
+    const usuariocorpas = await Usuarios.find({correo , password});
 
-  const usuarioss = await usuarios.find(req.query);
-
-  res.status(200).json(usuarioss);
+    res.status(200).json(usuariocorpas);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
 export async function getusuariosid(req,res) {
