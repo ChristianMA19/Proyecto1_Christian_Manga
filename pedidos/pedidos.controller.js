@@ -24,20 +24,33 @@ export async function createpedidos(req, res) {
 }
 
 export async function patchpedidos(req, res) {
-  const idpedidos = req.params.idpedidos;
-  const pedido = req.body;
-  const resultado = await Usuarios.findByIdAndUpdate(idpedidos,pedido, { new: true });
-  if (!resultado) {
-    return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+  try {
+    const idpedidos = req.params.idpedidos;
+    const pedido = req.body;
+    const verificacion = await Pedidos.findById(idpedidos);
+    if(verificacion.estadoP!="Entregado"){
+      const resultado = await Pedidos.findByIdAndUpdate(idpedidos,pedido, { new: true });
+      if (!resultado) {
+        return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+      }
+      res.status(200).json({});
+    }else{
+      res.status(404).json({mensaje:'El pedido ya fue entregado'});
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.status(200).json({});
 }
 
 export async function deletepedidos(req, res) {
-  const idpedidos = req.params.idpedidos;
-  const resultado = await Usuarios.findByIdAndUpdate(idpedidos,{ isDeleted: 'true' });
-  if (!resultado) {
-    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+  try {
+    const idpedidos = req.params.idpedidos;
+    const resultado = await Pedidos.findByIdAndUpdate(idpedidos,{ isDeleted: 'true' });
+    if (!resultado) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+    res.status(200).json({});
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.status(200).json({});
 }
