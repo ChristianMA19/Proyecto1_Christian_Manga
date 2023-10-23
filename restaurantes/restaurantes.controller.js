@@ -9,6 +9,16 @@ export async function getrestaurantes(req,res) {
   res.status(200).json(restaurantess);
 }
 
+export async function getrestaurantesid(req,res) {
+  try{
+    const idrestaurante = req.params.idrestaurante;
+    const restaurante = await Restaurantes.findById(idrestaurante);
+    res.status(200).json(restaurante);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 export async function createrestaurantes(req, res) {
   try {
     const restaurant = req.body;

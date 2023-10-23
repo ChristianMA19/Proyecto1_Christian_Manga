@@ -9,6 +9,16 @@ export async function getproductos(req,res) {
   res.status(200).json(productoss);
 }
 
+export async function getproductosid(req,res) {
+  try{
+    const idproducto = req.params.idproducto;
+    const producto = await Productos.findById(idproducto);
+    res.status(200).json(producto);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 export async function createproductos(req, res) {
   try {
     const product = req.body;

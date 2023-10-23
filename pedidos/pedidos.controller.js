@@ -11,6 +11,18 @@ export async function getpedidos(req,res) {
   res.status(200).json(pedidoss);
 }
 
+export async function getpedidosid(req,res) {
+  try{
+    console.log("hola");
+    const idpedidos = req.params.idpedidos;
+    const pedido = await Pedidos.findById(idpedidos);
+    console.log(pedido);
+    res.status(200).json(pedido);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 export async function createpedidos(req, res) {
   try {
     const order = req.body;

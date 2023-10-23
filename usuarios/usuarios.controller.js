@@ -1,8 +1,8 @@
 
 import Usuarios from './usuarios.model';
 
-export async function getusuarios(req,res) {
-  // const { name } = req.query;
+export async function getusuarioscorpas(req,res) {
+  const { name } = req.query;
   const idusuario = req.params.idusuario;
   console.log(idusuario);
 
@@ -10,6 +10,18 @@ export async function getusuarios(req,res) {
 
   res.status(200).json(usuarioss);
 }
+
+export async function getusuariosid(req,res) {
+  try{
+    const idusuario = req.params.idusuario;
+    const usuarios = await Usuarios.findById(idusuario);
+    console.log(usuarios);
+    res.status(200).json(usuarios);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 
 export async function createusuarios(req, res) {
   try {

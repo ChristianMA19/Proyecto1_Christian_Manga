@@ -1,9 +1,10 @@
-import { createusuarios, deleteusuarios, getusuarios, patchusuarios } from "./usuarios.controller";
+import { createusuarios, deleteusuarios, getusuarioscorpas, getusuariosid, patchusuarios } from "./usuarios.controller";
 import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba Read
-router.get('/', getusuarios );
+router.get('/', getusuarioscorpas );
+router.get('/:idusuario', getusuariosid );
 
 // Endpoint POST /prueba Create
 router.post('/', createusuarios );
