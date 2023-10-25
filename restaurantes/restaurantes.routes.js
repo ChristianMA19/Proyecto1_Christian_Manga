@@ -1,10 +1,10 @@
-import { createrestaurantes, deleterestaurantes, getrestaurantes, getrestaurantesid, patchrestaurantes } from "./restaurantes.controller";
+import { createrestaurantes, deleterestaurantes, getrestaurantes, getrestauranteid, patchrestaurantes } from "./restaurantes.controller";
 import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
 router.get('/', getrestaurantes );
-router.get('/:idrestaurante', getrestaurantesid );
+router.get('/:idrestaurante', getrestauranteid );
 
 
 // Endpoint POST /prueba

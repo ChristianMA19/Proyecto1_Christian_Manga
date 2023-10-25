@@ -10,6 +10,16 @@ const pedidosSchema = mongoose.Schema(
       required: [true],
       enum: ['Creado', 'En Curso', 'En Camino', 'Entregado']
     },
+    productosid: {
+      type: [String], 
+      required: [true],
+      validate: {
+        validator: function(categoriasArray) {
+          return categoriasArray.length > 0;
+        },
+        message: 'Debe haber al menos una categoría.'
+      },
+    },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true }

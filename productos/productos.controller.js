@@ -2,14 +2,37 @@
 import Productos from './productos.model';
 
 export async function getproductos(req,res) {
-  // const { name } = req.query;
+  try{
+    const { categoria, name } = req.query;  
+    const query = {};
+    if (categoria.length == 0) {
+      query.name = { $regex: name, $options: 'i' };
+      query.isDeleted = false;
+    }else if(name.length == 0){
+      query.categorias = { $in: categoria.split(",") };
+      query.isDeleted = false;
+    }else{
+      query.categorias = { $in: categoria.split(",") };
+      query.name = { $regex: name, $options: 'i' };;
+      query.isDeleted = false;
+    }
+
+    const restaurantes = await Productos.find(query);
+    if (!restaurantes) {
+      return res.status(404).json({ mensaje: 'Restaurantes no encontrados' });
+    }
+    res.status(200).json(restaurantes);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
   const productoss = await productos.find(req.query);
 
   res.status(200).json(productoss);
 }
 
-export async function getproductosid(req,res) {
+export async function getproductoid(req,res) {
   try{
     const idproducto = req.params.idproducto;
     const producto = await Productos.findById(idproducto);

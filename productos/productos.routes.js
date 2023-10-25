@@ -1,10 +1,10 @@
-import { createproductos, deleteproductos, getproductos, getproductosid, patchproductos } from "./productos.controller";
+import { createproductos, deleteproductos, getproductos, getproductoid, patchproductos } from "./productos.controller";
 import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
 router.get('/', getproductos );
-router.get('/:idproducto', getproductosid );
+router.get('/:idproducto', getproductoid );
 
 
 // Endpoint POST /prueba

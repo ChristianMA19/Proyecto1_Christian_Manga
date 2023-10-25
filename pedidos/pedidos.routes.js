@@ -1,10 +1,10 @@
-import { createpedidos, deletepedidos, getpedidos, getpedidosNOA, getpedidosid, patchpedidos } from "./pedidos.controller";
+import { createpedidos, deletepedidos, getpedidos, getpedidosNOA, getpedidoid, patchpedidos } from "./pedidos.controller";
 import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
 //router.get('/', getpedidos );
-router.get('/:idpedidos', getpedidosid );
+router.get('/:idpedidos', getpedidoid );
 router.get('/', getpedidosNOA );
 
 

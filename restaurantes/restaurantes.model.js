@@ -11,12 +11,12 @@ const restaurantesSchema = mongoose.Schema(
         validate: {
           validator: function(categoriasArray) {
             return categoriasArray.length > 0;
+          },
+          message: 'Debe haber al menos una categoría.'
         },
-        message: 'Debe haber al menos una categoría.'
       },
       isDeleted: { type: Boolean, default: false },
     },
-  },
   { timestamps: true }
 );
 

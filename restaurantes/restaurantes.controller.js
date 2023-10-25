@@ -2,14 +2,33 @@
 import Restaurantes from './restaurantes.model';
 
 export async function getrestaurantes(req,res) {
-  // const { name } = req.query;
+  try{
+    const { categoria, name } = req.query;  
+    const query = {};
+    if (categoria.length == 0) {
+      query.name = { $regex: name, $options: 'i' };
+      query.isDeleted = false;
+    }else if(name.length == 0){
+      query.categorias = { $in: categoria.split(",") };
+      query.isDeleted = false;
+    }else{
+      query.categorias = { $in: categoria.split(",") };
+      query.name = { $regex: name, $options: 'i' };;
+      query.isDeleted = false;
+    }
 
-  const restaurantess = await restaurantes.find(req.query);
-
-  res.status(200).json(restaurantess);
+    const restaurantes = await Restaurantes.find(query);
+    if (!restaurantes) {
+      return res.status(404).json({ mensaje: 'Restaurantes no encontrados' });
+    }
+    res.status(200).json(restaurantes);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
-export async function getrestaurantesid(req,res) {
+export async function getrestauranteid(req,res) {
   try{
     const idrestaurante = req.params.idrestaurante;
     const restaurante = await Restaurantes.findById(idrestaurante);

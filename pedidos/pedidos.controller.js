@@ -2,7 +2,8 @@
 import Pedidos from './pedidos.model';
 
 export async function getpedidos(req,res) {
-  // const { name } = req.query;
+  const { idUsuario, idRestaurante, timestamp } = req.query;
+  
   const idusuario = req.params.idusuario;
   console.log(idusuario);
 
@@ -11,7 +12,7 @@ export async function getpedidos(req,res) {
   res.status(200).json(pedidoss);
 }
 
-export async function getpedidosid(req,res) {
+export async function getpedidoid(req,res) {
   try{
     const idpedidos = req.params.idpedidos;
     const pedido = await Pedidos.findById(idpedidos);
