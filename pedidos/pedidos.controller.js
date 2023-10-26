@@ -12,14 +12,16 @@ export async function getpedidos(req,res) {
     if(req.query.idRestaurante){
       query.idRestaurante = req.query.idRestaurante;
     }
-    if(req.query.timestamp){
-      query.timestamp = req.query.timestamp;
+    if(req.query.timestampi && req.query.timestampf){//2023-10-23T01:04:00.000Z Para realizar pruebas
+      const timestampi = new Date(req.query.timestampi);
+      const timestampf = new Date(req.query.timestampf);
+      query.createdAt = { $gte: timestampi, $lte: timestampf }
     }
     if(req.query.isDeleted){
       query.isDeleted = req.query.isDeleted;
     }
 
-    const pedidos = await pedidos.find(query);
+    const pedidos = await Pedidos.find(query);
 
     res.status(200).json(pedidos);
   } catch (err) {
