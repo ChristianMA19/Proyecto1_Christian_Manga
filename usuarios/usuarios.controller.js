@@ -3,8 +3,10 @@ import Usuarios from './usuarios.model';
 
 export async function getusuarioscorpas(req,res) {
   try{
-    const { correo , password } = req.params;
-    const usuariocorpas = await Usuarios.find({correo , password});
+    //const { correo , password } = req.params;
+    const query = req.query;
+    query.isDeleted = false;
+    const usuariocorpas = await Usuarios.find(query);
 
     res.status(200).json(usuariocorpas);
   } catch (err) {
@@ -16,8 +18,11 @@ export async function getusuariosid(req,res) {
   try{
     const idusuario = req.params.idusuario;
     const usuarios = await Usuarios.findById(idusuario);
-    console.log(usuarios);
-    res.status(200).json(usuarios);
+    if(usuarios.isDeleted){
+      res.status(400).json("usuario no encontrado, este puede estar deleted.");
+    }else{
+      res.status(200).json(usuarios);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

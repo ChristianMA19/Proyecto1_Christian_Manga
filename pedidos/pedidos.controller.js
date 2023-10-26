@@ -2,21 +2,40 @@
 import Pedidos from './pedidos.model';
 
 export async function getpedidos(req,res) {
-  const { idUsuario, idRestaurante, timestamp } = req.query;
-  
-  const idusuario = req.params.idusuario;
-  console.log(idusuario);
+  try{
+    const query = {};
+    query.isDeleted = false;
 
-  const pedidoss = await pedidos.find(req.query);
+    if(req.query.idUsuario){
+      query.idUsuario = req.query.idUsuario;
+    }
+    if(req.query.idRestaurante){
+      query.idRestaurante = req.query.idRestaurante;
+    }
+    if(req.query.timestamp){
+      query.timestamp = req.query.timestamp;
+    }
+    if(req.query.isDeleted){
+      query.isDeleted = req.query.isDeleted;
+    }
 
-  res.status(200).json(pedidoss);
+    const pedidos = await pedidos.find(query);
+
+    res.status(200).json(pedidos);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
 export async function getpedidoid(req,res) {
   try{
     const idpedidos = req.params.idpedidos;
     const pedido = await Pedidos.findById(idpedidos);
-    res.status(200).json(pedido);
+    if(pedido.isDeleted){
+      res.status(400).json("Pedido no encontrado, este puede estar deleted.");
+    }else{
+      res.status(200).json(pedido);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -24,7 +43,13 @@ export async function getpedidoid(req,res) {
 
 export async function getpedidosNOA(req,res) {
   try{
-    const pedidosNOA = await Pedidos.find({estadoP: 'Creado'});
+    const query ={}
+    query.isDeleted = false;
+    query.estadoP = 'Creado';
+    if(req.query.isDeleted){
+      query.isDeleted = req.query.isDeleted;
+    }
+    const pedidosNOA = await Pedidos.find(query);
     res.status(200).json(pedidosNOA);
   } catch (err) {
     res.status(500).json(err);

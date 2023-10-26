@@ -3,7 +3,7 @@ import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba Read
-router.get('/:correo/:password', getusuarioscorpas );
+router.get('/', getusuarioscorpas );
 router.get('/:idusuario', getusuariosid );
 
 // Endpoint POST /prueba Create

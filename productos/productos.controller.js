@@ -3,40 +3,38 @@ import Productos from './productos.model';
 
 export async function getproductos(req,res) {
   try{
-    const { categoria, name } = req.query;  
     const query = {};
-    if (categoria.length == 0) {
-      query.name = { $regex: name, $options: 'i' };
-      query.isDeleted = false;
-    }else if(name.length == 0){
-      query.categorias = { $in: categoria.split(",") };
-      query.isDeleted = false;
-    }else{
-      query.categorias = { $in: categoria.split(",") };
-      query.name = { $regex: name, $options: 'i' };;
-      query.isDeleted = false;
+    query.isDeleted = false;
+    if(req.query.categoria){
+      query.categoria = req.query.categoria;
     }
-
-    const restaurantes = await Productos.find(query);
-    if (!restaurantes) {
-      return res.status(404).json({ mensaje: 'Restaurantes no encontrados' });
+    if(req.query.idRestaurante){
+      query.idRestaurante = req.query.idRestaurante;
     }
-    res.status(200).json(restaurantes);
+    if(req.query.isDeleted){
+      query.isDeleted = req.query.isDeleted;
+    }
+    
+    const productos = await Productos.find(query);
+    if (!productos) {
+      return res.status(404).json({ mensaje: 'Productos no encontrados' });
+    }
+    res.status(200).json(productos);
     
   } catch (err) {
     res.status(500).json(err);
   }
-
-  const productoss = await productos.find(req.query);
-
-  res.status(200).json(productoss);
 }
 
 export async function getproductoid(req,res) {
   try{
     const idproducto = req.params.idproducto;
     const producto = await Productos.findById(idproducto);
-    res.status(200).json(producto);
+    if(producto.isDeleted){
+      res.status(400).json("Producto no encontrado, este puede estar deleted.");
+    }else{
+      res.status(200).json(producto);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

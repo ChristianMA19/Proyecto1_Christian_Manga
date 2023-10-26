@@ -5,6 +5,7 @@ const restaurantesSchema = mongoose.Schema(
     // campos
       name: { type: String, required: [true], unique: [true]},
       direccion: { type: String, required: [true] },
+      idAdministrador: { type: String, required: [true]},
       categorias: {
         type: [String], 
         required: [true],

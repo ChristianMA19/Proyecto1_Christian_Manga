@@ -3,20 +3,19 @@ import Restaurantes from './restaurantes.model';
 
 export async function getrestaurantes(req,res) {
   try{
-    const { categoria, name } = req.query;  
     const query = {};
-    if (categoria.length == 0) {
-      query.name = { $regex: name, $options: 'i' };
-      query.isDeleted = false;
-    }else if(name.length == 0){
-      query.categorias = { $in: categoria.split(",") };
-      query.isDeleted = false;
-    }else{
-      query.categorias = { $in: categoria.split(",") };
-      query.name = { $regex: name, $options: 'i' };;
-      query.isDeleted = false;
-    }
+    query.isDeleted = false;
 
+    if(req.query.name){
+      query.name = {$regex: req.query.name, $options: 'i'};
+    }
+    if(req.query.categorias){
+      query.categorias = req.query.categorias
+    }
+    if(req.query.isDeleted){
+      query.isDeleted = req.query.isDeleted;
+    }
+    
     const restaurantes = await Restaurantes.find(query);
     if (!restaurantes) {
       return res.status(404).json({ mensaje: 'Restaurantes no encontrados' });
@@ -32,7 +31,11 @@ export async function getrestauranteid(req,res) {
   try{
     const idrestaurante = req.params.idrestaurante;
     const restaurante = await Restaurantes.findById(idrestaurante);
-    res.status(200).json(restaurante);
+    if(restaurante.isDeleted){
+      res.status(400).json("Restaurante no encontrado, este puede estar deleted.");
+    }else{
+      res.status(200).json(restaurante);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

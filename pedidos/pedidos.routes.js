@@ -3,7 +3,7 @@ import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
-//router.get('/', getpedidos );
+router.get('/', getpedidos );
 router.get('/:idpedidos', getpedidoid );
 router.get('/', getpedidosNOA );
 
