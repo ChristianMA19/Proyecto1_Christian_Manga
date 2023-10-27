@@ -5,6 +5,7 @@ const pedidosSchema = mongoose.Schema(
     // campos
     idUsuario: { type: String, required: [true] },
     idRestaurante: { type: String, required: [true] },
+    idDomiciliario: { type: String, required: [true] },
     estadoP: {
       type: String, 
       required: [true],

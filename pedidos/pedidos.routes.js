@@ -3,9 +3,9 @@ import {Router} from 'express';
 const router = Router();
 
 // Endpoint GET /prueba
+router.get('/pedidosnoa', getpedidosNOA );
 router.get('/', getpedidos );
 router.get('/:idpedidos', getpedidoid );
-//router.get('/', getpedidosNOA );
 
 
 // Endpoint POST /prueba
