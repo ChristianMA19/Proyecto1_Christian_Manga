@@ -50,9 +50,10 @@ export async function patchusuarios(req, res) {
     const user = req.body;
     const resultado = await Usuarios.findByIdAndUpdate(idusuario,user, { new: true });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+      return res.status(404).json('Usuario no encontrado');
+    }else{
+      res.status(200).json("Usuario actualizado");
     }
-    res.status(200).json({});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -63,9 +64,10 @@ export async function deleteusuarios(req, res) {
     const idusuario = req.params.idusuario;
     const resultado = await Usuarios.findByIdAndUpdate(idusuario,{ isDeleted: 'true' });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+      return res.status(404).json('Usuario no encontrado');
+    }else{
+      res.status(200).json("Usuario eliminado");
     }
-    res.status(200).json({});
   } catch (err) {
     res.status(500).json(err);
   }

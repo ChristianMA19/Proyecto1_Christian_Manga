@@ -59,8 +59,9 @@ export async function patchproductos(req, res) {
     const resultado = await Productos.findByIdAndUpdate(idproducto,producto, { new: true });
     if (!resultado) {
       return res.status(404).json('Producto no encontrado');
+    }else{
+      res.status(200).json(resultado);
     }
-    res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -72,8 +73,9 @@ export async function deleteproductos(req, res) {
     const resultado = await Productos.findByIdAndUpdate(idproducto,{ isDeleted: 'true' });
     if (!resultado) {
       return res.status(404).json('Producto no encontrado');
+    }else{
+      res.status(200).json("Producto eliminado");
     }
-    res.status(200).json("Producto eliminado");
   } catch (err) {
     res.status(500).json(err);
   }

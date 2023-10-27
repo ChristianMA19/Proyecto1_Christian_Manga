@@ -61,8 +61,9 @@ export async function patchrestaurantes(req, res) {
     const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,restaurante, { new: true });
     if (!resultado) {
       return res.status(404).json('Restaurante no encontrado');
+    }else{
+      res.status(200).json("Restaurante actualizado");
     }
-    res.status(200).json({});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -74,8 +75,9 @@ export async function deleterestaurantes(req, res) {
     const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,{ isDeleted: 'true' });
     if (!resultado) {
       return res.status(404).json('Restaurante no encontrado');
+    }else{
+      res.status(200).json("Restaurante eliminado");
     }
-    res.status(200).json({});
   } catch (err) {
     res.status(500).json(err);
   }
