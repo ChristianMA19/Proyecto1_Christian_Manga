@@ -1,18 +1,20 @@
+import { ObjectId } from 'mongodb';
+
 const mongoose = require('mongoose');
 
 const pedidosSchema = mongoose.Schema(
   {
     // campos
-    idUsuario: { type: String, required: [true] },
-    idRestaurante: { type: String, required: [true] },
-    idDomiciliario: { type: String, required: [true] },
+    idUsuario: { type: ObjectId, required: [true] },
+    idRestaurante: { type: ObjectId, required: [true] },
+    idDomiciliario: { type: ObjectId, required: [false] },
     estadoP: {
       type: String, 
       required: [true],
       enum: ['Creado', 'En Curso', 'En Camino', 'Entregado']
     },
     productosid: {
-      type: [String], 
+      type: [ObjectId], 
       required: [true],
       validate: {
         validator: function(categoriasArray) {

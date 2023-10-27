@@ -16,10 +16,11 @@ export async function getproductos(req,res) {
     }
     
     const productos = await Productos.find(query);
-    if (!productos) {
-      return res.status(404).json({ mensaje: 'Productos no encontrados' });
+    if (productos.length == 0||!productos ){
+      return res.status(404).json('Productos no encontrados o deleted');
+    }else{
+      res.status(200).json(productos);
     }
-    res.status(200).json(productos);
     
   } catch (err) {
     res.status(500).json(err);
@@ -31,7 +32,7 @@ export async function getproductoid(req,res) {
     const idproducto = req.params.idproducto;
     const producto = await Productos.findById(idproducto);
     if(producto.isDeleted){
-      res.status(400).json("Producto no encontrado, este puede estar deleted.");
+      res.status(404).json("Producto no encontrado, este puede estar deleted.");
     }else{
       res.status(200).json(producto);
     }
@@ -57,9 +58,9 @@ export async function patchproductos(req, res) {
     const producto = req.body;
     const resultado = await Productos.findByIdAndUpdate(idproducto,producto, { new: true });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+      return res.status(404).json('Producto no encontrado');
     }
-    res.status(200).json({});
+    res.status(200).json(resultado);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -70,9 +71,9 @@ export async function deleteproductos(req, res) {
     const idproducto = req.params.idproducto;
     const resultado = await Productos.findByIdAndUpdate(idproducto,{ isDeleted: 'true' });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+      return res.status(404).json('Producto no encontrado');
     }
-    res.status(200).json({});
+    res.status(200).json("Producto eliminado");
   } catch (err) {
     res.status(500).json(err);
   }

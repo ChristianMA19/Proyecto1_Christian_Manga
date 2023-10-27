@@ -23,7 +23,11 @@ export async function getpedidos(req,res) {
 
     const pedidos = await Pedidos.find(query);
 
-    res.status(200).json(pedidos);
+    if(pedidos.length == 0||!pedidos ){
+      return res.status(404).json('Pedidos no encontrados o deleted');
+    }else{
+      res.status(200).json(pedidos);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -34,7 +38,7 @@ export async function getpedidoid(req,res) {
     const idpedidos = req.params.idpedidos;
     const pedido = await Pedidos.findById(idpedidos);
     if(pedido.isDeleted){
-      res.status(400).json("Pedido no encontrado, este puede estar deleted.");
+      res.status(404).json("Pedido no encontrado, este puede estar deleted.");
     }else{
       res.status(200).json(pedido);
     }
@@ -77,11 +81,11 @@ export async function patchpedidos(req, res) {
     if(verificacion.estadoP!="Entregado"){
       const resultado = await Pedidos.findByIdAndUpdate(idpedidos,pedido, { new: true });
       if (!resultado) {
-        return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+        return res.status(404).json('Pedido no encontrado');
       }
-      res.status(200).json({});
+      res.status(200).json("Pedido actualizado");
     }else{
-      res.status(404).json({mensaje:'El pedido ya fue entregado'});
+      res.status(404).json('El pedido ya fue entregado');
     }
   } catch (err) {
     res.status(500).json(err);
@@ -93,9 +97,10 @@ export async function deletepedidos(req, res) {
     const idpedidos = req.params.idpedidos;
     const resultado = await Pedidos.findByIdAndUpdate(idpedidos,{ isDeleted: 'true' });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+      return res.status(404).json('Pedido no encontrado');
+    }else{
+      res.status(200).json("Pedido eliminado");
     }
-    res.status(200).json({});
   } catch (err) {
     res.status(500).json(err);
   }

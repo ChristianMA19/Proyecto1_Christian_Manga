@@ -17,10 +17,12 @@ export async function getrestaurantes(req,res) {
     }
     
     const restaurantes = await Restaurantes.find(query);
-    if (!restaurantes) {
-      return res.status(404).json({ mensaje: 'Restaurantes no encontrados' });
+    console.log(restaurantes.length == 0);
+    if (!restaurantes.length) {
+      return res.status(404).json("Restaurantes no encontrados");
+    }else{
+      res.status(200).json(restaurantes);
     }
-    res.status(200).json(restaurantes);
     
   } catch (err) {
     res.status(500).json(err);
@@ -31,8 +33,8 @@ export async function getrestauranteid(req,res) {
   try{
     const idrestaurante = req.params.idrestaurante;
     const restaurante = await Restaurantes.findById(idrestaurante);
-    if(restaurante.isDeleted){
-      res.status(400).json("Restaurante no encontrado, este puede estar deleted.");
+    if(restaurante==null || restaurante.isDeleted){
+      res.status(404).json("Restaurante no encontrado, este puede estar deleted o no existir.");
     }else{
       res.status(200).json(restaurante);
     }
@@ -58,7 +60,7 @@ export async function patchrestaurantes(req, res) {
     const restaurante = req.body;
     const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,restaurante, { new: true });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Restaurante no encontrado' });
+      return res.status(404).json('Restaurante no encontrado');
     }
     res.status(200).json({});
   } catch (err) {
@@ -71,7 +73,7 @@ export async function deleterestaurantes(req, res) {
     const idrestaurante = req.params.idrestaurante;
     const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,{ isDeleted: 'true' });
     if (!resultado) {
-      return res.status(404).json({ mensaje: 'Restaurante no encontrado' });
+      return res.status(404).json('Restaurante no encontrado');
     }
     res.status(200).json({});
   } catch (err) {
