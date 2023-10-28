@@ -31,7 +31,7 @@ export async function getproductoid(req,res) {
   try{
     const idproducto = req.params.idproducto;
     const producto = await Productos.findById(idproducto);
-    if(producto.isDeleted){
+    if(producto==null||producto.isDeleted){
       res.status(404).json("Producto no encontrado, este puede estar deleted.");
     }else{
       res.status(200).json(producto);

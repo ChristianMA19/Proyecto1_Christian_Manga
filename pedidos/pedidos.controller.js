@@ -83,11 +83,12 @@ export async function patchpedidos(req, res) {
     const pedido = req.body;
     const verificacion = await Pedidos.findById(idpedidos);
     if(verificacion.estadoP!="Entregado"){
-      const resultado = await Pedidos.findByIdAndUpdate(idpedidos,pedido, { new: true });
+      const resultado = await Pedidos.findByIdAndUpdate(idpedidos,pedido);
       if (!resultado) {
         return res.status(404).json('Pedido no encontrado');
+      }else{
+        res.status(200).json("Pedido actualizado");
       }
-      res.status(200).json("Pedido actualizado");
     }else{
       res.status(404).json('El pedido ya fue entregado');
     }
