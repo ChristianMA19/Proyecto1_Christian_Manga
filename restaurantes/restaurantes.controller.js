@@ -58,7 +58,7 @@ export async function patchrestaurantes(req, res) {
   try{
     const idrestaurante = req.params.idrestaurante;
     const restaurante = req.body;
-    const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,restaurante, { new: true });
+    const resultado = await Restaurantes.findByIdAndUpdate(idrestaurante,restaurante);
     if (!resultado) {
       return res.status(404).json('Restaurante no encontrado');
     }else{
