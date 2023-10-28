@@ -60,7 +60,7 @@ export async function patchproductos(req, res) {
     if (!resultado) {
       return res.status(404).json('Producto no encontrado');
     }else{
-      res.status(200).json(resultado);
+      res.status(200).json("Producto actualizado");
     }
   } catch (err) {
     res.status(500).json(err);
