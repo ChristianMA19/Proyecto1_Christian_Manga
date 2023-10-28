@@ -56,7 +56,11 @@ export async function getpedidosNOA(req,res) {
       query.isDeleted = req.query.isDeleted;
     }
     const pedidosNOA = await Pedidos.find(query);
-    res.status(200).json(pedidosNOA);
+    if(pedidosNOA.length == 0||!pedidosNOA ){
+      return res.status(404).json('Pedidos no encontrados o deleted');
+    }else{
+      res.status(200).json(pedidosNOA);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
