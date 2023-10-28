@@ -56,7 +56,7 @@ export async function patchproductos(req, res) {
   try {
     const idproducto = req.params.idproducto;
     const producto = req.body;
-    const resultado = await Productos.findByIdAndUpdate(idproducto,producto, { new: true });
+    const resultado = await Productos.findByIdAndUpdate(idproducto,producto);
     if (!resultado) {
       return res.status(404).json('Producto no encontrado');
     }else{
